@@ -5,27 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LinkedLists"
         mc:Ignorable="d"
-        Title="Связанные списки" Height="450" Width="500"
+        Title="Связанные списки" Height="450" Width="600"
         MinHeight="100" MinWidth="100" MaxHeight="650" MaxWidth="700">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="6*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <ListBox Grid.Row="0" Margin="10"/>
+            <ListBox Grid.Row="0" Margin="10" Name="listBoxList"
+                     FontSize="20"/>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Content="-" Margin="5 10"
-                        FontSize="30"/>
-                <Button Grid.Column="1" Content="Очистить" Margin="5 10"/>
+                        FontSize="30" Name="btnDelete" Click="btnDelete_Click"/>
+                <Button Grid.Column="1" Content="Очистить" Margin="5 10"
+                        Name="btnClear" Click="btnClear_Click"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="1">
@@ -37,20 +39,35 @@
             </Grid.RowDefinitions>
             <Label Content="Введите элемент"
                    Grid.Row="0"/>
-            <TextBox Margin="10 15" Grid.Row="1"/>
+            <TextBox Margin="10 15" Grid.Row="1"
+                     Name="txtNumber" FontSize="15"
+                     VerticalAlignment="Center"
+                     />
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
                         Content="Добавить"
-                        Margin="5 10"/>
-                <Button Grid.Column="1"
+                        Margin="5 10"
+                        Name="btnAdd" Click="btnAdd_Click"/>
+                <Button Grid.Column="2"
                         Content="Найти"
-                        Margin="5 10"/>
+                        Margin="5 10"
+                        Name="btnContains" Click="btnContains_Click"/>
+                <Button Grid.Column="1"
+                        Content="Добавить в начало"
+                        Margin="5 10"
+                        Name="btnAddFirst" Click="btnAddFirst_Click"
+                        />
             </Grid>
-            <TextBlock Grid.Row="3" Margin="10"/>
+            <TextBlock Grid.Row="3" Margin="10"
+                       Name="txbResult"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="20"/>
         </Grid>
     </Grid>
 </Window>
