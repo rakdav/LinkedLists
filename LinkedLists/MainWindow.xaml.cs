@@ -21,10 +21,13 @@ namespace LinkedLists
     public partial class MainWindow : Window
     {
         private OurLinkedList<int> ints;
+        private DoublyLinkedList<int> intDoubly;
+        
         public MainWindow()
         {
             InitializeComponent();
             ints = new OurLinkedList<int>();
+            intDoubly=new DoublyLinkedList<int>();
             btnClear.IsEnabled=false;
             btnDelete.IsEnabled=false;
             btnContains.IsEnabled=false;
@@ -34,7 +37,14 @@ namespace LinkedLists
         {
             try
             {
-                ints.Add(int.Parse(txtNumber.Text));
+                if (one.IsChecked == true)
+                {
+                    ints.Add(int.Parse(txtNumber.Text));
+                }
+                else 
+                {
+                    intDoubly.Add(int.Parse(txtNumber.Text));
+                }
                 updateList();
                 txtNumber.Clear();
                 btnClear.IsEnabled = true;
@@ -51,9 +61,19 @@ namespace LinkedLists
         private void updateList()
         {
             listBoxList.Items.Clear();
-            foreach (int i in ints)
+            if (one.IsChecked==true)
             {
-                listBoxList.Items.Add(i);
+                foreach (int i in ints)
+                {
+                    listBoxList.Items.Add(i);
+                }
+            }
+            else
+            {
+                foreach (int i in intDoubly)
+                {
+                    listBoxList.Items.Add(i);
+                }
             }
         }
 
@@ -61,7 +81,10 @@ namespace LinkedLists
         {
             try
             {
-                ints.AddFirst(int.Parse(txtNumber.Text));
+                if (one.IsChecked == true)
+                    ints.AddFirst(int.Parse(txtNumber.Text));
+                else
+                    intDoubly.AddFirst(int.Parse(txtNumber.Text));
                 updateList();
                 txtNumber.Clear();
                 btnClear.IsEnabled = true;
@@ -83,7 +106,10 @@ namespace LinkedLists
                     listBoxList.SelectedItem.ToString()+"?", "Внимание",
                     MessageBoxButton.OKCancel,MessageBoxImage.Question)==MessageBoxResult.OK)
                 {
-                    ints.Remove(int.Parse(listBoxList.SelectedItem.ToString()));
+                    if (one.IsChecked == true)
+                        ints.Remove(int.Parse(listBoxList.SelectedItem.ToString()));
+                    else
+                        intDoubly.Remove(int.Parse(listBoxList.SelectedItem.ToString()));
                     updateList();
                     if(ints.Count==0)
                     {
@@ -105,8 +131,11 @@ namespace LinkedLists
             if (MessageBox.Show("Вы действительно хотите очистить список?",
                 "Вопрос", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
                 MessageBoxResult.OK)
-            { 
-                ints.Clear();
+            {
+                if (one.IsChecked == true)
+                    ints.Clear();
+                else
+                    intDoubly.Clear();
                 updateList();
                 btnClear.IsEnabled = false;
                 btnDelete.IsEnabled = false;

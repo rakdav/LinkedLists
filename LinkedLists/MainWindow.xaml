@@ -32,18 +32,19 @@
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
             <Label Content="Введите элемент"
-                   Grid.Row="0"/>
-            <TextBox Margin="10 15" Grid.Row="1"
+                   Grid.Row="1"/>
+            <TextBox Margin="10 15" Grid.Row="2"
                      Name="txtNumber" FontSize="15"
                      VerticalAlignment="Center"
                      />
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -63,11 +64,20 @@
                         Name="btnAddFirst" Click="btnAddFirst_Click"
                         />
             </Grid>
-            <TextBlock Grid.Row="3" Margin="10"
+            <TextBlock Grid.Row="4" Margin="10"
                        Name="txbResult"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontSize="20"/>
+            <GroupBox Grid.Row="0" Header="Введите вид списка"
+                      Margin="5">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <RadioButton Content="Односвязный" GroupName="Link"
+                                 Margin="5" Name="one" IsChecked="True"/>
+                    <RadioButton Content="Двухсвязный" GroupName="Link"
+                                 Margin="5" Name="two"/>
+                </StackPanel>
+            </GroupBox>
         </Grid>
     </Grid>
 </Window>
