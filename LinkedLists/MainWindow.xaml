@@ -73,9 +73,9 @@
                       Margin="5">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                     <RadioButton Content="Односвязный" GroupName="Link"
-                                 Margin="5" Name="one" IsChecked="True"/>
+                                 Margin="5" Name="one" IsChecked="True" Checked="one_Checked"/>
                     <RadioButton Content="Двухсвязный" GroupName="Link"
-                                 Margin="5" Name="two"/>
+                                 Margin="5" Name="two" Checked="one_Checked"/>
                 </StackPanel>
             </GroupBox>
         </Grid>

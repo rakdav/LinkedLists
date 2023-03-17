@@ -25,9 +25,9 @@ namespace LinkedLists
         
         public MainWindow()
         {
-            InitializeComponent();
             ints = new OurLinkedList<int>();
-            intDoubly=new DoublyLinkedList<int>();
+            intDoubly = new DoublyLinkedList<int>();
+            InitializeComponent();
             btnClear.IsEnabled=false;
             btnDelete.IsEnabled=false;
             btnContains.IsEnabled=false;
@@ -107,16 +107,26 @@ namespace LinkedLists
                     MessageBoxButton.OKCancel,MessageBoxImage.Question)==MessageBoxResult.OK)
                 {
                     if (one.IsChecked == true)
-                        ints.Remove(int.Parse(listBoxList.SelectedItem.ToString()));
-                    else
-                        intDoubly.Remove(int.Parse(listBoxList.SelectedItem.ToString()));
-                    updateList();
-                    if(ints.Count==0)
                     {
-                        btnClear.IsEnabled = false;
-                        btnDelete.IsEnabled = false;
-                        btnContains.IsEnabled = false;
+                        ints.Remove(int.Parse(listBoxList.SelectedItem.ToString()));
+                        if (ints.Count == 0)
+                        {
+                            btnClear.IsEnabled = false;
+                            btnDelete.IsEnabled = false;
+                            btnContains.IsEnabled = false;
+                        }
                     }
+                    else
+                    {
+                        intDoubly.Remove(int.Parse(listBoxList.SelectedItem.ToString()));
+                        if (intDoubly.Count == 0)
+                        {
+                            btnClear.IsEnabled = false;
+                            btnDelete.IsEnabled = false;
+                            btnContains.IsEnabled = false;
+                        }
+                    }
+                    updateList();
                 }
             }
             else
@@ -147,26 +157,52 @@ namespace LinkedLists
         {
             try
             {
-                if (ints.Count != 0)
+                if(one.IsChecked==true)
                 {
-                    if (ints.Contains(int.Parse(txtNumber.Text)))
+                    if (ints.Count != 0)
                     {
-                        txbResult.Text = "Найден";
-                        txbResult.Foreground = Brushes.Green;
+                        if (ints.Contains(int.Parse(txtNumber.Text)))
+                        {
+                            txbResult.Text = "Найден";
+                            txbResult.Foreground = Brushes.Green;
+                        }
+                        else
+                        {
+                            txbResult.Text = "Не найден";
+                            txbResult.Foreground = Brushes.Red;
+                        }
                     }
                     else
                     {
-                        txbResult.Text = "Не найден";
-                        txbResult.Foreground = Brushes.Red;
+                        MessageBox.Show("Введите элементы списка",
+                        "Внимание", MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Введите элементы списка",
-                    "Внимание", MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-
+                    if (intDoubly.Count != 0)
+                    {
+                        if (intDoubly.Contains(int.Parse(txtNumber.Text)))
+                        {
+                            txbResult.Text = "Найден";
+                            txbResult.Foreground = Brushes.Green;
+                        }
+                        else
+                        {
+                            txbResult.Text = "Не найден";
+                            txbResult.Foreground = Brushes.Red;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Введите элементы списка",
+                        "Внимание", MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    }
                 }
+                
             }
             catch(Exception ex)
             {
@@ -175,6 +211,13 @@ namespace LinkedLists
                 MessageBoxImage.Warning);
 
             }
+        }
+
+        private void one_Checked(object sender, RoutedEventArgs e)
+        {
+            ints.Clear();
+            intDoubly.Clear();
+            updateList();
         }
     }
 }

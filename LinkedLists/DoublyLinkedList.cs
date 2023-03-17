@@ -12,7 +12,7 @@ namespace LinkedLists
         DoublyNode<T> head;
         DoublyNode<T> tail;
         int count;
-        public int Count { get; set; }
+        public int Count { get { return count; } }
         public bool IsEmpty 
         { 
             get { return count == 0; } 
@@ -25,7 +25,7 @@ namespace LinkedLists
                 head = node;
             else
             {
-                tail.Next = node.Next;
+                tail.Next = node;
                 node.Previus = tail;
             }
             tail=node;
