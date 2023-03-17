@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LinkedLists
 {
-    internal class LinkedList<T>:IEnumerable<T> 
+    internal class OurLinkedList<T>:IEnumerable<T> 
     {
         Node<T>? head;
         Node<T>? tail;

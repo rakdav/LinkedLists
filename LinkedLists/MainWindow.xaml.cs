@@ -20,11 +20,14 @@ namespace LinkedLists
     /// </summary>
     public partial class MainWindow : Window
     {
-        private LinkedList<int> ints;
+        private OurLinkedList<int> ints;
         public MainWindow()
         {
             InitializeComponent();
-            ints = new LinkedList<int>();
+            ints = new OurLinkedList<int>();
+            btnClear.IsEnabled=false;
+            btnDelete.IsEnabled=false;
+            btnContains.IsEnabled=false;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -34,6 +37,9 @@ namespace LinkedLists
                 ints.Add(int.Parse(txtNumber.Text));
                 updateList();
                 txtNumber.Clear();
+                btnClear.IsEnabled = true;
+                btnDelete.IsEnabled = true;
+                btnContains.IsEnabled = true;
             }
             catch(Exception ex) 
             {
@@ -58,6 +64,9 @@ namespace LinkedLists
                 ints.AddFirst(int.Parse(txtNumber.Text));
                 updateList();
                 txtNumber.Clear();
+                btnClear.IsEnabled = true;
+                btnDelete.IsEnabled = true;
+                btnContains.IsEnabled = true;
             }
             catch (Exception ex)
             {
@@ -70,8 +79,19 @@ namespace LinkedLists
         {
             if (listBoxList.SelectedIndex >= 0)
             {
-                ints.Remove(int.Parse(listBoxList.SelectedItem.ToString()));
-                updateList();
+                if(MessageBox.Show("Вы действительно хотите удалить "+
+                    listBoxList.SelectedItem.ToString()+"?", "Внимание",
+                    MessageBoxButton.OKCancel,MessageBoxImage.Question)==MessageBoxResult.OK)
+                {
+                    ints.Remove(int.Parse(listBoxList.SelectedItem.ToString()));
+                    updateList();
+                    if(ints.Count==0)
+                    {
+                        btnClear.IsEnabled = false;
+                        btnDelete.IsEnabled = false;
+                        btnContains.IsEnabled = false;
+                    }
+                }
             }
             else
             {
@@ -82,8 +102,16 @@ namespace LinkedLists
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            ints.Clear();
-            updateList();
+            if (MessageBox.Show("Вы действительно хотите очистить список?",
+                "Вопрос", MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
+                MessageBoxResult.OK)
+            { 
+                ints.Clear();
+                updateList();
+                btnClear.IsEnabled = false;
+                btnDelete.IsEnabled = false;
+                btnContains.IsEnabled = false;
+            }
         }
 
         private void btnContains_Click(object sender, RoutedEventArgs e)
